@@ -23,7 +23,7 @@ Route::get('/', [PageController::class, 'home']);
 
 Route::prefix('member')->name('member.')->group(function(){
     Route::resource('/', MemberController::class)->only(['create', 'store']);
-    Route::delete('/session', [MemberController::class, 'delete'])->name('session.delete');
+    Route::delete('/session', [MemberSessionController::class, 'delete'])->name('session.delete');
     Route::resource('session', MemberSessionController::class)
         ->only(['create', 'store']);
 

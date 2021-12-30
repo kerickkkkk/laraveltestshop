@@ -10,7 +10,15 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body>
-        @if (Route::has('login'))
+        <a href="{{ route('member.session.create') }}">Log in</a>
+        <br>
+        <a href="{{ route('member.create') }}">Register</a>
+        <form method="POST" action="{{ route('member.session.delete') }}">
+            @csrf
+            @method('DELETE')
+            <button>Log out</button>
+        </form>
+        {{-- @if (Route::has('login'))
             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                 @auth
                     <div> hi : {{ Auth::user()->name }}</div>
@@ -31,7 +39,7 @@
                     @endif
                 @endauth
             </div>
-        @endif
+        @endif --}}
 
         @yield('content')
 

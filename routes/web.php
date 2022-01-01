@@ -29,7 +29,7 @@ Route::prefix('member')->name('member.')->group(function(){
 
 });
 
-Route::prefix('controls')->middleware(['auth'])->name('controls.')->group(function(){
+Route::prefix('controls')->middleware(['member.auth'])->name('controls.')->group(function(){
     Route::get('/', [ControlsPageController::class , 'home'])->name('home');
 });
 

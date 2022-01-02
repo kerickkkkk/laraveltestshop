@@ -10,25 +10,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body>
-        {{-- @if($member) --}}
-        @if(MemberAuth::isLoggedIn())
-        
-            {{-- <p>hi {{ $member->email }}</p> --}}
-            <p>hi {{ MemberAuth::member()->email }}</p>
-            <form action="{{route('member.session.delete')}}" method="post">
-                @csrf
-                @method('DELETE')
-                <button type="submit">Log out</button>
-            </form>
-        @else 
-            <div class="alert alert-danger">
-                <a href="{{ route('member.session.create') }}">Log in</a>
-                <br>
-                <a href="{{ route('member.create') }}">Register</a>
-            </div>
-        @endif
-
-        {{-- @if (Route::has('login'))
+        @if (Route::has('login'))
             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                 @auth
                     <div> hi : {{ Auth::user()->name }}</div>
@@ -49,7 +31,26 @@
                     @endif
                 @endauth
             </div>
+        @endif
+        
+        {{-- auth 測試區段 --}}
+        {{-- @if(MemberAuth::isLoggedIn())
+        
+            <p>hi {{ MemberAuth::member()->email }}</p>
+            <form action="{{route('member.session.delete')}}" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Log out</button>
+            </form>
+        @else 
+            <div class="alert alert-danger">
+                <a href="{{ route('member.session.create') }}">Log in</a>
+                <br>
+                <a href="{{ route('member.create') }}">Register</a>
+            </div>
         @endif --}}
+
+        
 
         @yield('content')
 

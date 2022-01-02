@@ -2,10 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\controls\PageController as ControlsPageController;
-use App\Http\Controllers\MemberController;
-use App\Http\Controllers\MemberSessionController;
 use App\Http\Controllers\PageController;
 
+// 測試 auth 部分
+// use App\Http\Controllers\MemberController;
+// use App\Http\Controllers\MemberSessionController;
+
+// Route::prefix('member')->name('member.')->group(function(){
+//     Route::resource('/', MemberController::class)->only(['create', 'store']);
+//     Route::delete('/session', [MemberSessionController::class, 'delete'])->name('session.delete');
+//     Route::resource('session', MemberSessionController::class)
+//         ->only(['create', 'store']);
+
+// });
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,15 +30,9 @@ use App\Http\Controllers\PageController;
 
 Route::get('/', [PageController::class, 'home']);
 
-Route::prefix('member')->name('member.')->group(function(){
-    Route::resource('/', MemberController::class)->only(['create', 'store']);
-    Route::delete('/session', [MemberSessionController::class, 'delete'])->name('session.delete');
-    Route::resource('session', MemberSessionController::class)
-        ->only(['create', 'store']);
 
-});
 
-Route::prefix('controls')->middleware(['member.auth'])->name('controls.')->group(function(){
+Route::prefix('controls')->middleware(['member'])->name('controls.')->group(function(){
     Route::get('/', [ControlsPageController::class , 'home'])->name('home');
 });
 

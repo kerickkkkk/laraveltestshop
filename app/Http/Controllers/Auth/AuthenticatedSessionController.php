@@ -30,6 +30,15 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        // 取得使用者
+        $user = Auth::guard('web')->user();
+        
+        // gate 是否有 is_admin 欄位
+        if( $user->is_admin ){
+            // 有 就讓 guard admin 登入
+            Auth::guard('admin')->login($user);
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
@@ -44,6 +53,7 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
 

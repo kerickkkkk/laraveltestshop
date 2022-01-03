@@ -10,9 +10,9 @@ class PageController extends Controller
 {
     public function home()
     {
-        if( !Auth::user()->is_admin ){
-            return redirect('/')->withErrors('沒有權限');
-        }
+        // if( !Auth::user()->is_admin ){
+        //     return redirect('/')->withErrors('沒有權限');
+        // }
         return view('controls.home');
     }
 }

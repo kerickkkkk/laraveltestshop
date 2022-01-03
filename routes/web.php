@@ -32,7 +32,7 @@ Route::get('/', [PageController::class, 'home']);
 
 
 
-Route::prefix('controls')->middleware(['member'])->name('controls.')->group(function(){
+Route::prefix('controls')->middleware(['auth:admin'])->name('controls.')->group(function(){
     Route::get('/', [ControlsPageController::class , 'home'])->name('home');
 });
 
